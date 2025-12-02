@@ -1,4 +1,4 @@
-package org.moufid.inscriptionservice.entities;
+package org.moufid.coursservice.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +20,6 @@ public class Student {
 
     private String name;
     private String email;
+
+    private String specialite;
 }

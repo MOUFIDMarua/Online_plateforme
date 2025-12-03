@@ -23,4 +23,6 @@ public class Course {
     private String description;
     private String teacherName;
     private int duration;
+    private String youtubeLink;
+
 }

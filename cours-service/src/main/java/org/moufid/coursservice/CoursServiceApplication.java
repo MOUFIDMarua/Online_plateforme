@@ -8,18 +8,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class CoursServiceApplication {
+public class    CoursServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CoursServiceApplication.class, args);
     }
 
     @Bean
-    CommandLineRunner start(CourseRepository repo){
+    CommandLineRunner start(CourseRepository courseRepo) {
         return args -> {
-            repo.save(new Course(null,"Java Basics","Introduction to Java","Mr Maroua",20));
-            repo.save(new Course(null,"Spring Boot","Create REST APIs","Mme Sara",15));
-            repo.save(new Course(null,"React JS","Frontend Development","Mr Yassine",10));
+            courseRepo.save(new Course(null, "Java Basics", "Intro", "Mme Sara", 20,"https://www.youtube.com/watch?v=vQYKsCyovuE&list=PLVwJuon7YOmB9RrHl2yXOf7yx2-G6Sz-m&index=1"));
+            courseRepo.save(new Course(null, "Spring Boot", "REST APIs", "Mr Yassine", 30,"https://www.youtube.com/watch?v=vQYKsCyovuE&list=PLVwJuon7YOmB9RrHl2yXOf7yx2-G6Sz-m&index=1"));
         };
     }
+
 }

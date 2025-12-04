@@ -16,7 +16,6 @@ public class YoutubeApiResponse {
 
     @Data
     public static class Id {
-        @JsonProperty("videoId")
         private String videoId;
     }
 
@@ -24,24 +23,17 @@ public class YoutubeApiResponse {
     public static class Snippet {
         private String title;
         private String description;
+        private String channelTitle;
         private Thumbnails thumbnails;
     }
 
     @Data
     public static class Thumbnails {
-
-        @JsonProperty("default")
-        private Thumbnail defaultThumbnail;
-
-        private Thumbnail medium;
-
-        private Thumbnail high;
+        private Medium medium;
     }
 
     @Data
-    public static class Thumbnail {
+    public static class Medium {
         private String url;
-        private int width;
-        private int height;
     }
 }

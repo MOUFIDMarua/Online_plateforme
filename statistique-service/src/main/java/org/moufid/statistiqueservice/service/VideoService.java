@@ -8,9 +8,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class VideoService {
 
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     @Value("${youtube.api-key}")
     private String apiKey;
@@ -18,21 +19,22 @@ public class VideoService {
     @Value("${youtube.base-url}")
     private String baseUrl;
 
-    public VideoService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.build();
-    }
-
     public Mono<YoutubeApiResponse> searchVideos(String keyword) {
 
-        String url = baseUrl + "/search?part=snippet&type=video&maxResults=5&q="
-                + keyword + "&key=" + apiKey;
-
-        System.out.println("CALLING URL ---> " + url);
-
-        return webClient
+        return webClientBuilder.build()
                 .get()
-                .uri(url)
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("https")
+                        .host(baseUrl)                          // www.googleapis.com
+                        .path("/youtube/v3/search")             // correct path
+                        .queryParam("part", "snippet")
+                        .queryParam("maxResults", 25)           // → 25 vidéos
+                        .queryParam("q", keyword)
+                        .queryParam("type", "video")
+                        .queryParam("key", apiKey)
+                        .build()
+                )
                 .retrieve()
-                .bodyToMono(YoutubeApiResponse.class); // ❌ plus de block()
+                .bodyToMono(YoutubeApiResponse.class);
     }
 }

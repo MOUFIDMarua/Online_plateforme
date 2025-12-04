@@ -1,15 +1,11 @@
 package org.moufid.inscriptionservice.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import jakarta.persistence.Transient;
-
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -24,6 +20,9 @@ public class Enrollment {
     private Long studentId;
     private Long courseId;
 
+    private LocalDateTime enrolledAt;
+
+    // 👇 important pour que setCourseDetails(...) existe
     @Transient
     private Object courseDetails;
 }
